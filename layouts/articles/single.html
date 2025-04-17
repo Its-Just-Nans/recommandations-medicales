@@ -29,7 +29,7 @@
     <article class="col-12">
       <div class="w-768">
         <header class="cabinet__header">
-          <div class="cabinet-bg" style="background-image: url('{{ absURL "images/articles/{{$.File.BaseFileName}}.webp')" }}">
+          <div class="cabinet-bg" style="background-image: url('{{ printf "images/articles/%s.webp" $.File.BaseFileName | absURL }}')">
             <h1 class="cabinet-title">{{ .Title }}</h1>
             {{ with .Params.Subtitle }}<h2>{{ . }}</h2>{{ end }}
           </div>
@@ -52,7 +52,7 @@
             {{with .NextInSection }}
             <div class="card card-list article mw-248">
               <figure class="figure-img-nav" style="background-color: var(--bg-article-hex)">
-                <img src="{{ absURL "images/articles/{{.File.BaseFileName}}.webp" }}" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
+                <img src="{{ printf "images/articles/%s.webp" .File.BaseFileName | absURL }}" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
               </figure>
               <div class="card-header d-flex flex-column">
                 <span class="card-subtitle mb-2">Article suivant</span>
@@ -63,7 +63,7 @@
             {{with .PrevInSection }}
             <div class="card card-list article mw-248">
               <figure class="figure-img-nav" style="background-color: var(--bg-article-hex)">
-                <img src="{{ absURL "images/articles/{{.File.BaseFileName}}.webp" }}" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
+                <img src="{{ printf "images/articles/%s.webp" .File.BaseFileName | absURL }}" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
               </figure>
               <div class="card-header d-flex flex-column">
                 <span class="card-subtitle mb-2">Article précédent</span>

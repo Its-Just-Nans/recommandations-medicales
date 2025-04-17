@@ -20,7 +20,7 @@
       <div class="col-12 grid-list">
       {{ range .Pages.ByLastmod.Reverse }}
         <div class="card card-list">
-          <div class="card-img-top" style="background-image: url('{{ absURL "images/cabinet/{{.File.BaseFileName}}.webp')" }}"></div>
+          <div class="card-img-top" style="background-image: url('{{ printf "images/cabinet/%s.webp" .File.BaseFileName | absURL }}')"></div>
           <div class="card-header">
             <h2 class="card-title"><a class="stretched-link text-reset" href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
             {{ with .Params.Subtitle}}<h3 class="card-subtitle">{{ . }}</h3>{{end}}

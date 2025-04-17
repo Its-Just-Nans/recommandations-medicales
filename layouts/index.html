@@ -106,7 +106,7 @@
       <div class="grid-1-2-3 mt-5">
       {{ range ( where site.RegularPages.ByPublishDate.Reverse "Section" "cabinet" | first 6 ) }}
         <div class="card card-primary-action shadow-none mr-0 mb-2">
-          <img loading="lazy" alt="Illustration de {{ .Title }}" class="card-img-top img-index" src="{{ absURL "images/cabinet/{{.File.BaseFileName}}.webp" }}" style="max-height: 9rem;">
+          <img loading="lazy" alt="Illustration de {{ .Title }}" class="card-img-top img-index" src="{{ printf "images/cabinet/%s.webp" .File.BaseFileName | absURL }}" style="max-height: 9rem;">
           <div class="card-header">
             <h4 class="card-title mb-2"><a href="{{ .RelPermalink }}" class="text-reset stretched-link">{{ .Title }}</a></h4>
             <small class="text-black-secondary"><time datetime="{{partial "widgets/html-datetime.html" .}}">{{ .PublishDate | time.Format "2 Jan" }}</time></small>
@@ -123,7 +123,7 @@
       <div class="grid-1-2-3">
         {{ range ( where site.RegularPages.ByPublishDate.Reverse "Section" "articles" | first 6 ) }}
         <div class="card card-primary-action shadow-none mr-0 mb-2">
-          <img loading="lazy" alt="Illustration de {{ .Title }}" class="card-img-top img-index" src="{{ absURL "images/articles/{{.File.BaseFileName}}.webp" }}" style="max-height: 9rem">
+          <img loading="lazy" alt="Illustration de {{ .Title }}" class="card-img-top img-index" src="{{ printf "images/articles/%s.webp" .File.BaseFileName | absURL }}" style="max-height: 9rem">
           <div class="card-header">
             <h4 class="card-title mb-2"><a href="{{ .RelPermalink }}" class="text-reset stretched-link">{{ .Title }}</a></h4>
             <small class="text-black-secondary"><time datetime="{{partial "widgets/html-datetime.html" .}}">{{ .PublishDate | time.Format "2 Jan" }}</time></small>
