@@ -52,7 +52,7 @@
             {{with .NextInSection }}
             <div class="card card-list mw-248 my-2">
               <figure class="figure-img-nav">
-                <img src="/images/cabinet/{{.File.BaseFileName}}.webp" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
+                <img src="{{ .Site.BaseURL }}images/cabinet/{{.File.BaseFileName}}.webp" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
               </figure>
               <div class="card-header d-flex flex-column">
                 <span class="card-subtitle mb-2">Article suivant</span>
@@ -63,7 +63,7 @@
             {{with .PrevInSection }}
             <div class="card card-list mw-248 my-2">
               <figure class="figure-img-nav">
-                <img src="/images/cabinet/{{.File.BaseFileName}}.webp" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
+                <img src="{{ .Site.BaseURL }}images/cabinet/{{.File.BaseFileName}}.webp" alt="Illustration de {{ .Title }}" class="card-img-top card-img-nav" loading="lazy">
               </figure>
               <div class="card-header d-flex flex-column">
                 <span class="card-subtitle mb-2">Article précédent</span>

@@ -1,159 +1,166 @@
 <!-- OGP doc: https://developers.facebook.com/docs/sharing/webmasters/#images -->
 <!-- Generate image var: jpg/gif/png only for FB. Twitter: +webp -->
-{{ $imageUrl := "" }}
-{{ with .Params.image }}
-  {{ $image := $.File.BaseFileName }}
-  {{ if $.Params.imageWEBP }}
-    {{ $imageUrl = printf "/images/photos/%s.webp" $image }}
-  {{ else if $.Params.imagePNG }}
-    {{ $imageUrl = printf "/images/photos/%s.png" $image }}
-  {{ else if and (eq $.Section "articles") (eq $.Kind "page")}}
-    {{ $imageUrl = printf "/images/articles/%s.jpg" $image }}
-  {{ else if and (eq $.Section "cabinet") (eq $.Kind "page")}}
-    {{ $imageUrl = printf "/images/cabinet/%s.jpg" $image }}
-  {{ else }}
-    {{ $imageUrl = printf "/images/photos/%s.jpg" $image }}
-  {{ end }}
-{{ else }}
-  {{ $imageUrl = $.Site.Params.ogimage }}
-{{ end }}
+{{ $imageUrl := "" }} {{ with .Params.image }} {{ $image := $.File.BaseFileName
+}} {{ if $.Params.imageWEBP }} {{ $imageUrl = printf "/images/photos/%s.webp"
+$image }} {{ else if $.Params.imagePNG }} {{ $imageUrl = printf
+"/images/photos/%s.png" $image }} {{ else if and (eq $.Section "articles") (eq
+$.Kind "page")}} {{ $imageUrl = printf "/images/articles/%s.jpg" $image }} {{
+else if and (eq $.Section "cabinet") (eq $.Kind "page")}} {{ $imageUrl = printf
+"/images/cabinet/%s.jpg" $image }} {{ else }} {{ $imageUrl = printf
+"/images/photos/%s.jpg" $image }} {{ end }} {{ else }} {{ $imageUrl =
+$.Site.Params.ogimage }} {{ end }}
 
 <!-- Title Tags 70 ch -->
-{{ $metaTitle := "" }}
-{{ $year := "" }}
-{{ if ge .Params.Annees (sub now.Year 2) }}{{ $year = .Params.Annees }}{{ end }}
-{{ if .IsHome }}
-  {{ $metaTitle = (printf "Recommandations médicales pour le généraliste | RecoMédicales" ) }}
-{{ else if and (eq .Section "recommandations") (.Params.TitleSeo) }}
-  {{ $metaTitle = ( printf "%s %s %s %s" "Recommandations" .Params.TitleSeo $year "| RecoMédicales" ) }}
-{{ else if .Params.TitleSeo }}
-  {{ $metaTitle = ( printf "%s %s" .Params.TitleSeo "| RecoMédicales" ) }}
-{{ else if and (eq .Section "recommandations") (eq .Kind "page") }}
-  {{ $metaTitle = ( printf "%s %s%s %s %s" "Recommandations sur" (.Params.prefix | safeHTML ) .Title $year "| RecoMédicales" ) }}
-{{ else }}
-  {{ $metaTitle = ( printf "%s %s" (.Title | safeHTML) "| RecoMédicales" ) }}
-{{ end }}
+{{ $metaTitle := "" }} {{ $year := "" }} {{ if ge .Params.Annees (sub now.Year
+2) }}{{ $year = .Params.Annees }}{{ end }} {{ if .IsHome }} {{ $metaTitle =
+(printf "Recommandations médicales pour le généraliste | RecoMédicales" ) }} {{
+else if and (eq .Section "recommandations") (.Params.TitleSeo) }} {{ $metaTitle
+= ( printf "%s %s %s %s" "Recommandations" .Params.TitleSeo $year "|
+RecoMédicales" ) }} {{ else if .Params.TitleSeo }} {{ $metaTitle = ( printf "%s
+%s" .Params.TitleSeo "| RecoMédicales" ) }} {{ else if and (eq .Section
+"recommandations") (eq .Kind "page") }} {{ $metaTitle = ( printf "%s %s%s %s %s"
+"Recommandations sur" (.Params.prefix | safeHTML ) .Title $year "|
+RecoMédicales" ) }} {{ else }} {{ $metaTitle = ( printf "%s %s" (.Title |
+safeHTML) "| RecoMédicales" ) }} {{ end }}
 
 <title itemprop="name">{{ $metaTitle }}</title>
-<meta property="og:title" content="{{ .Title }}">
-<meta property="og:site_name" content="{{ $.Site.Title }}">
-<meta name="twitter:card" content="summary">
-<meta property="fb:page_id" content="102181682323638">
+<meta property="og:title" content="{{ .Title }}" />
+<meta property="og:site_name" content="{{ $.Site.Title }}" />
+<meta name="twitter:card" content="summary" />
+<meta property="fb:page_id" content="102181682323638" />
 
 <!-- Description Tags 50-160 ch -->
-{{ $metaDescription := "" }}
-{{ if .Description }}
-  {{ $metaDescription = .Params.description }}
-{{ else if and (eq .Section "recommandations") (eq .Kind "page") }}
-  {{ $metaDescription = (printf "%s %s%s %s" "Recommandations pour" .Params.Prefix .Params.Title "en médecine générale. Conduite à tenir en consultation, arbre décisionnel et bilan de première intention." ) }}
-{{ else }}
-  {{ $metaDescription = $.Site.Params.description }}
-{{ end }}
-<meta name="description" content="{{ $metaDescription }}">
-<meta property="og:description" content="{{ $metaDescription }}">
-<meta name="twitter:description" content="{{ $metaDescription }}">
+{{ $metaDescription := "" }} {{ if .Description }} {{ $metaDescription =
+.Params.description }} {{ else if and (eq .Section "recommandations") (eq .Kind
+"page") }} {{ $metaDescription = (printf "%s %s%s %s" "Recommandations pour"
+.Params.Prefix .Params.Title "en médecine générale. Conduite à tenir en
+consultation, arbre décisionnel et bilan de première intention." ) }} {{ else }}
+{{ $metaDescription = $.Site.Params.description }} {{ end }}
+<meta name="description" content="{{ $metaDescription }}" />
+<meta property="og:description" content="{{ $metaDescription }}" />
+<meta name="twitter:description" content="{{ $metaDescription }}" />
 
-{{- with .Params.Meta }}
-{{ printf "%s" . | safeHTML }}
-{{ end -}}
+{{- with .Params.Meta }} {{ printf "%s" . | safeHTML }} {{ end -}}
 
 <!-- Link Tags -->
 <!--<base href="{{ .Site.BaseURL }}">--><!--For local Linkinator-->
-{{ if not (.Params.noindex) }}<link rel="canonical" href="{{ .Permalink }}">{{ end }}
-<meta property="og:url" content="{{ .Permalink }}">
+{{ if not (.Params.noindex) }}<link rel="canonical" href="{{ .Permalink }}" />{{
+end }}
+<meta property="og:url" content="{{ .Permalink }}" />
 
 <!-- Language Tags -->
-<meta property="og:locale" content="fr_FR">
+<meta property="og:locale" content="fr_FR" />
 
 <!-- Image Tags -->
-{{- if and (eq .Section "articles") (eq .Kind "page") -}}<link rel="preload" as="image" href="/images/articles/{{.File.BaseFileName}}.webp" fetchpriority="high">{{ else if and (eq .Section "cabinet") (eq .Kind "page") -}}<link rel="preload" as="image" href="/images/cabinet/{{.File.BaseFileName}}.webp" fetchpriority="high">{{ else if and (eq .Section "recommandations") (eq .Kind "page")}}<link rel="preload" as="image" href="{{ $imageUrl | absURL }}" fetchpriority="high">{{ end }}
-<meta property="og:image" content="{{ $imageUrl | absURL }}">
-<meta property="twitter:image" content="{{ $imageUrl | absURL }}">
-<meta name="twitter:image:alt" content="Illustration de {{ $.Params.Prefix }}{{ $.Title }}">
+{{- if and (eq .Section "articles") (eq .Kind "page") -}}<link
+  rel="preload"
+  as="image"
+  href="{{ .Site.BaseURL }}images/articles/{{.File.BaseFileName}}.webp"
+  fetchpriority="high"
+/>{{ else if and (eq .Section "cabinet") (eq .Kind "page") -}}<link
+  rel="preload"
+  as="image"
+  href="{{ .Site.BaseURL }}images/cabinet/{{.File.BaseFileName}}.webp"
+  fetchpriority="high"
+/>{{ else if and (eq .Section "recommandations") (eq .Kind "page")}}<link
+  rel="preload"
+  as="image"
+  href="{{ $imageUrl | absURL }}"
+  fetchpriority="high"
+/>{{ end }}
+<meta property="og:image" content="{{ $imageUrl | absURL }}" />
+<meta property="twitter:image" content="{{ $imageUrl | absURL }}" />
+<meta
+  name="twitter:image:alt"
+  content="Illustration de {{ $.Params.Prefix }}{{ $.Title }}"
+/>
 
 <!-- Sitemap & RSS Feed -->
-<link rel="sitemap" type="application/xml" title="Sitemap" href="{{ .Site.BaseURL }}sitemap.xml">
-<link href="{{ .Site.BaseURL }}index.xml" rel="alternate feed" type="application/rss+xml" title="{{ $.Site.Title }} - Dernières recommandations">
+<link
+  rel="sitemap"
+  type="application/xml"
+  title="Sitemap"
+  href="{{ .Site.BaseURL }}sitemap.xml"
+/>
+<link
+  href="{{ .Site.BaseURL }}index.xml"
+  rel="alternate feed"
+  type="application/rss+xml"
+  title="{{ $.Site.Title }} - Dernières recommandations"
+/>
 
 <!-- Article tags https://jsonld.com/article/ -->
-{{ $ISO8601 := "2006-01-02T15:04:05-07:00" }}
-{{- if or (eq .Section "recommandations") (eq .Section "articles") (eq .Section "cabinet") -}}
-  {{- if .IsPage -}}
-    <meta property="og:type" content="article">
-    <meta property="og:updated_time" {{ .Lastmod.Format $ISO8601 | printf "content=%q" | safeHTMLAttr }}>
-    <meta property="article:published_time" content="{{ .Date.Format "2006-01-02" }}">
-    <!-- <link rel="index" href="/recommandations/"> Links to top level resource in an hierarchical structure -->
-  {{ end }}
-{{ else }}
-  <meta property="og:type" content="website">
-{{ end }}
-
-{{ if eq .Section "recommandations" }}
-  {{ with .Params.auteurs }}
-    <meta property="article:author" content="{{ index . 0 }}"> <!-- https://www.facebook.com/jeanbaptiste.fron -->
-    <meta name="author" content="{{ index . 0 }}">
-  {{ end }}
-
-  {{ with .Params.specialites }}
-    <meta property="article:section" content="{{ index . 0 | humanize }}">
-  {{ end }}
-
-  {{ $name := (printf "%s%s" .Params.prefix .Title | safeJS) }}
-  <!-- L'image doit faire au moins 112 pixels de largeur et de hauteur. -->
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Article",
-      "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": {{ .Site.BaseURL }}
-      },
-      "articleSection" : "{{ .Section | title }}",
-      "name" : {{ .Title }},
-      "headline": {{ .Title }},
-      "description" : {{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }},
-      {{ if (not .Params.longHtml) }}"articleBody": {{ .Plain }},{{ end }}
-      "inLanguage" : "{{ .Lang }}",
-      "image": [{{ $imageUrl | absURL }}],
-      "author": {
-        "@type": "Person",
-        "name": "{{ range first 1 .Params.auteurs }}{{.}}{{end}}"
-      },
-      "wordCount": "{{ .WordCount }}",
-      "copyrightYear": "{{ .Date.Format "2006" }}",
-      "datePublished": {{ .PublishDate.Format $ISO8601 }},
-      "dateModified": {{ .Lastmod.Format $ISO8601 }},
-      "url" : {{ .Permalink }},
-      "publisher": {
-        "@type": "Organization",
-        "name": {{ .Site.Title }},
-        "logo": {
-          "@type": "imageObject",
-          "url": {{ .Site.Params.icon | absURL }}
-        }
+{{ $ISO8601 := "2006-01-02T15:04:05-07:00" }} {{- if or (eq .Section
+"recommandations") (eq .Section "articles") (eq .Section "cabinet") -}} {{- if
+.IsPage -}}
+<meta property="og:type" content="article" />
+<meta property="og:updated_time" {{ .Lastmod.Format $ISO8601 | printf
+"content=%q" | safeHTMLAttr }}> <meta property="article:published_time"
+content="{{ .Date.Format "2006-01-02" }}">
+<!-- <link rel="index" href="{{ .Site.BaseURL }}recommandations/"> Links to top level resource in an hierarchical structure -->
+{{ end }} {{ else }}
+<meta property="og:type" content="website" />
+{{ end }} {{ if eq .Section "recommandations" }} {{ with .Params.auteurs }}
+<meta property="article:author" content="{{ index . 0 }}" />
+<!-- https://www.facebook.com/jeanbaptiste.fron -->
+<meta name="author" content="{{ index . 0 }}" />
+{{ end }} {{ with .Params.specialites }}
+<meta property="article:section" content="{{ index . 0 | humanize }}" />
+{{ end }} {{ $name := (printf "%s%s" .Params.prefix .Title | safeJS) }}
+<!-- L'image doit faire au moins 112 pixels de largeur et de hauteur. -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ .Site.BaseURL }}
+    },
+    "articleSection" : "{{ .Section | title }}",
+    "name" : {{ .Title }},
+    "headline": {{ .Title }},
+    "description" : {{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }},
+    {{ if (not .Params.longHtml) }}"articleBody": {{ .Plain }},{{ end }}
+    "inLanguage" : "{{ .Lang }}",
+    "image": [{{ $imageUrl | absURL }}],
+    "author": {
+      "@type": "Person",
+      "name": "{{ range first 1 .Params.auteurs }}{{.}}{{end}}"
+    },
+    "wordCount": "{{ .WordCount }}",
+    "copyrightYear": "{{ .Date.Format "2006" }}",
+    "datePublished": {{ .PublishDate.Format $ISO8601 }},
+    "dateModified": {{ .Lastmod.Format $ISO8601 }},
+    "url" : {{ .Permalink }},
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ .Site.Title }},
+      "logo": {
+        "@type": "imageObject",
+        "url": {{ .Site.Params.icon | absURL }}
       }
     }
-  </script>
+  }
+</script>
 
-  {{ if .Params.sctid }}
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "MedicalCondition",
-      "name": {{ .Title }},
-      {{ if .Params.synonyms }}"alternateName": "{{ delimit .Params.synonyms ", " }}",{{ end }}
-      "medicineSystem": "evidence-based",
-      "image": {{ $imageUrl | absURL }},
-      "url" : {{ .Permalink }},
-      "code": {
-        "@type": "MedicalCode",
-        "code": "{{ .Params.sctid }}",
-        "codingSystem": "SNOMED-CT"
-      }
+{{ if .Params.sctid }}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalCondition",
+    "name": {{ .Title }},
+    {{ if .Params.synonyms }}"alternateName": "{{ delimit .Params.synonyms ", " }}",{{ end }}
+    "medicineSystem": "evidence-based",
+    "image": {{ $imageUrl | absURL }},
+    "url" : {{ .Permalink }},
+    "code": {
+      "@type": "MedicalCode",
+      "code": "{{ .Params.sctid }}",
+      "codingSystem": "SNOMED-CT"
     }
-  </script>
-  {{ end }}
-{{ end }}
+  }
+</script>
+{{ end }} {{ end }}
 
 <!-- Website tags -->
 {{ if .IsHome -}}
@@ -179,41 +186,52 @@
 {{ end }}
 
 <!-- Crawlers -->
-<meta name="bingbot" content="nocache">
+<meta name="bingbot" content="nocache" />
 {{ if or (.Params.noindex) (eq .Kind "taxonomy") (eq .Kind "term") }}
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="noindex, follow" />
 {{ else if .Params.seoInvisible}}
-<meta name="robots" content="noindex, nofollow">
+<meta name="robots" content="noindex, nofollow" />
 {{ else }}
-<meta name="robots" content="index, follow, noai, noimageai">
-{{ end }}
-
-{{ hugo.Generator }}
+<meta name="robots" content="index, follow, noai, noimageai" />
+{{ end }} {{ hugo.Generator }}
 <!-- https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs -->
-<link rel="icon" href="{{ .Site.BaseURL }}favicon.ico"><!-- 32×32 -->
-<link rel="icon" href="{{ .Site.BaseURL }}favicon.svg" sizes="any" type="image/svg+xml">
-<link rel="apple-touch-icon" href="{{ .Site.BaseURL }}apple-touch-icon.png"><!-- 180x180 -->
-<link rel="manifest" href="{{ .Site.BaseURL }}manifest.webmanifest">
-<meta name="theme-color" content="#4150f5">
-<meta name="imagemode" content="force">
-<meta name="coverage" content="Worldwide">
-<meta name="distribution" content="Global">
-<meta name="HandheldFriendly" content="True">
-<meta name="msapplication-tap-highlight" content="no">
-<meta name="msapplication-starturl" content="/">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="application-name" content="{{ $.Site.Title }}">
-<meta name="apple-mobile-web-app-title" content="{{ $.Site.Title }}">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-touch-fullscreen" content="yes">
+<link rel="icon" href="{{ .Site.BaseURL }}favicon.ico" /><!-- 32×32 -->
+<link
+  rel="icon"
+  href="{{ .Site.BaseURL }}favicon.svg"
+  sizes="any"
+  type="image/svg+xml"
+/>
+<link
+  rel="apple-touch-icon"
+  href="{{ .Site.BaseURL }}apple-touch-icon.png"
+/><!-- 180x180 -->
+<link rel="manifest" href="{{ .Site.BaseURL }}manifest.webmanifest" />
+<meta name="theme-color" content="#4150f5" />
+<meta name="imagemode" content="force" />
+<meta name="coverage" content="Worldwide" />
+<meta name="distribution" content="Global" />
+<meta name="HandheldFriendly" content="True" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="msapplication-starturl" content="/" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="application-name" content="{{ $.Site.Title }}" />
+<meta name="apple-mobile-web-app-title" content="{{ $.Site.Title }}" />
+<meta
+  name="apple-mobile-web-app-status-bar-style"
+  content="black-translucent"
+/>
+<meta name="apple-touch-fullscreen" content="yes" />
 <script>
   // Register the service worker
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
       navigator.serviceWorker
-        .register('{{ .Site.BaseURL }}sw.js')
-        .catch(error => console.log(`Service worker registration failed: ${error}`))
+        .register("{{ .Site.BaseURL }}sw.js")
+        .catch((error) =>
+          console.log(`Service worker registration failed: ${error}`)
+        );
     });
   }
 </script>

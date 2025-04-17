@@ -8,22 +8,38 @@
           <h1 class="small">{{ .Title }}</h1>
         </div>
         <div class="icon-container">
-          <img src="/images/icons/journal.svg" class="img-fluid" alt="Actualités pour le médecin généraliste" aria-hidden="true">
+          <img
+            src="{{ .Site.BaseURL }}images/icons/journal.svg"
+            class="img-fluid"
+            alt="Actualités pour le médecin généraliste"
+            aria-hidden="true"
+          />
         </div>
       </header>
     </div>
     <div class="col">
-        <div class="row">
-          <article class="col d-flex justify-content-center">
-            <div class="w-768">
-              <div class="mt-4 recommandation__content d-flex flex-column align-items-center">
-                {{ .Content }}
-                <div class="text-center"><button class="btn btn-link my-5 d-print-none" type="button" data-toggle="modal" data-target="#modal-contact">Suggérer une autre source d'information</button></div>
+      <div class="row">
+        <article class="col d-flex justify-content-center">
+          <div class="w-768">
+            <div
+              class="mt-4 recommandation__content d-flex flex-column align-items-center"
+            >
+              {{ .Content }}
+              <div class="text-center">
+                <button
+                  class="btn btn-link my-5 d-print-none"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#modal-contact"
+                >
+                  Suggérer une autre source d'information
+                </button>
               </div>
             </div>
-          </article>
-        </div>
+          </div>
+        </article>
       </div>
+    </div>
   </div>
 </div>
 {{ end }}

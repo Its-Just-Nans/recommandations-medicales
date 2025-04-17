@@ -1,3 +1,8 @@
 {{ with .Params.annees }}
-  <a class="chip chip-primary chip-action chip-xs" href="/annees/{{ . }}/" rel="tag">{{ . }}</a>
+<a
+  class="chip chip-primary chip-action chip-xs"
+  href="{{ .Site.BaseURL }}annees/{{ . }}/"
+  rel="tag"
+  >{{ . }}</a
+>
 {{ end }}

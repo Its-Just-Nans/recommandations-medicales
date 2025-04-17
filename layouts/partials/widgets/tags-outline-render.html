@@ -1,5 +1,8 @@
-{{ with .Params.tags }}
-  {{ range . }}
-    <a class="chip chip-outline chip-action chip-xs" href="/tags/{{ . | urlize }}/" rel="tag">{{ . }}</a>
-  {{ end }}
-{{ end }}
+{{ with .Params.tags }} {{ range . }}
+<a
+  class="chip chip-outline chip-action chip-xs"
+  href="{{ .Site.BaseURL }}tags/{{ . | urlize }}/"
+  rel="tag"
+  >{{ . }}</a
+>
+{{ end }} {{ end }}

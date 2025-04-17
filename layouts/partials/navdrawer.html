@@ -1,26 +1,38 @@
-<nav id="doc-navdrawer" aria-label="Barre de navigation latérale" class="navdrawer navdrawer-permanent-lg doc-navdrawer" tabindex="-1">
-   <div class="navdrawer-content custom-scrollbar">
-      <div class="d-flex flex-column min-vh-100">
-         <div class="navdrawer-header text-primary d-flex">
-            <div class="navdrawer-logo"></div>
-            <a class="navbar-brand" href="/">RecoMédicales</a>
-         </div>
-         <div class="navdrawer-nav">
-            <a class="text-secondary" href="/scores/">Scores et outils cliniques</a>
-            {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }}
-               {{ if eq "specialites" $taxonomyname }}
-                  {{- range $category, $pageOfCategory := $taxonomy -}}
-                  <a role="button" class="collapsed" data-toggle="collapse" aria-expanded="false" aria-controls="navd-{{$category | urlize | lower}}"
-                  href="#navd-{{ $category | urlize }}">{{ $category | truncate 30 }}</a>
-                  <div class="collapse" id="navd-{{$category | urlize | lower}}">
-                     {{- range $pageOfCategory.Pages.ByTitle -}}
-                     <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
-                     {{ end }}
-                  </div>
-                  {{ end }}
-               {{ end }}
-            {{ end }}
-         </div>
+<nav
+  id="doc-navdrawer"
+  aria-label="Barre de navigation latérale"
+  class="navdrawer navdrawer-permanent-lg doc-navdrawer"
+  tabindex="-1"
+>
+  <div class="navdrawer-content custom-scrollbar">
+    <div class="d-flex flex-column min-vh-100">
+      <div class="navdrawer-header text-primary d-flex">
+        <div class="navdrawer-logo"></div>
+        <a class="navbar-brand" href="{{ .Site.BaseURL }}">RecoMédicales</a>
       </div>
-   </div>
+      <div class="navdrawer-nav">
+        <a class="text-secondary" href="{{ .Site.BaseURL }}scores/"
+          >Scores et outils cliniques</a
+        >
+        {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }} {{ if eq
+        "specialites" $taxonomyname }} {{- range $category, $pageOfCategory :=
+        $taxonomy -}}
+        <a
+          role="button"
+          class="collapsed"
+          data-toggle="collapse"
+          aria-expanded="false"
+          aria-controls="navd-{{$category | urlize | lower}}"
+          href="#navd-{{ $category | urlize }}"
+          >{{ $category | truncate 30 }}</a
+        >
+        <div class="collapse" id="navd-{{$category | urlize | lower}}">
+          {{- range $pageOfCategory.Pages.ByTitle -}}
+          <a href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a>
+          {{ end }}
+        </div>
+        {{ end }} {{ end }} {{ end }}
+      </div>
+    </div>
+  </div>
 </nav>

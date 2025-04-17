@@ -6,10 +6,17 @@
         <header class="fancy__header grid-1-2">
           <div class="title-container">
             <h1 class="small break font-weight-bold mb-4">Recommandations</h1>
-            <h2>Les dernières recommandations adaptées pour le médecin généraliste</h2>
+            <h2>
+              Les dernières recommandations adaptées pour le médecin généraliste
+            </h2>
           </div>
           <div class="icon-container">
-            <img src="/images/icons/recommandations.svg" class="img-fluid" alt="Recommandations médicales pour le médecin généraliste" aria-hidden="true">
+            <img
+              src="{{ .Site.BaseURL }}images/icons/recommandations.svg"
+              class="img-fluid"
+              alt="Recommandations médicales pour le médecin généraliste"
+              aria-hidden="true"
+            />
           </div>
         </header>
         <nav aria-label="Fil d'ariane" class="my-5">
@@ -17,31 +24,44 @@
             {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
           </ol>
         </nav>
-        {{ with .Content }}<div class="mb-5">{{ . }}</div>{{ end }}
+        {{ with .Content }}
+        <div class="mb-5">{{ . }}</div>
+        {{ end }}
       </div>
       <div class="col-12 d-flex justify-content-center mb-5">
         <div class="w-768">
-          <a class="chip chip-action chip-outline chip-outline-active" href="#">Toutes</a>
-          <a class="chip chip-action chip-outline" href="/annees/">Par années</a>
+          <a class="chip chip-action chip-outline chip-outline-active" href="#"
+            >Toutes</a
+          >
+          <a
+            class="chip chip-action chip-outline"
+            href="{{ .Site.BaseURL }}annees/"
+            >Par années</a
+          >
           <!-- create a list with all uppercase letters -->
           {{ $letters := split "ABCDEFGHIJKLMNOPQRSTUVWXYZ" "" }}
           <!-- range all pages sorted by their title -->
           {{ range .Data.Pages.ByTitle }}
-            <!-- get the first character of each title. Assumes that the title is never empty! -->
-            {{ $firstChar := substr .Title 0 1 | upper }}
-            <!-- in case $firstChar is a letter -->
-            {{ if $firstChar | in $letters }}
-              <!-- get the current letter -->
-              {{ $curLetter := $.Scratch.Get "curLetter" }}
-              <!-- if $curLetter isn't set or the letter has changed -->
-              {{ if ne $firstChar $curLetter }}
-              <!-- update the current letter and print it -->
-                {{ $.Scratch.Set "curLetter" $firstChar }}
-                <h2 class="typography-healine-6 font-weight-bolder mt-5">{{ $firstChar }}</h2>
-              {{ end }}
-              <p class="m-0"><a href="{{ .RelPermalink }}" class="list-group-item">{{ .Title | markdownify }}</a></p>
-            {{ end }}
+          <!-- get the first character of each title. Assumes that the title is never empty! -->
+          {{ $firstChar := substr .Title 0 1 | upper }}
+          <!-- in case $firstChar is a letter -->
+          {{ if $firstChar | in $letters }}
+          <!-- get the current letter -->
+          {{ $curLetter := $.Scratch.Get "curLetter" }}
+          <!-- if $curLetter isn't set or the letter has changed -->
+          {{ if ne $firstChar $curLetter }}
+          <!-- update the current letter and print it -->
+          {{ $.Scratch.Set "curLetter" $firstChar }}
+          <h2 class="typography-healine-6 font-weight-bolder mt-5">
+            {{ $firstChar }}
+          </h2>
           {{ end }}
+          <p class="m-0">
+            <a href="{{ .RelPermalink }}" class="list-group-item"
+              >{{ .Title | markdownify }}</a
+            >
+          </p>
+          {{ end }} {{ end }}
         </div>
       </div>
     </div>

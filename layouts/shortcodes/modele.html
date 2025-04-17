@@ -9,7 +9,7 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable {{ with .Get "size" }}modal-{{ . }}{{ end }}">
     <div class="modal-content">
       <div class="modal-header flex-column border-0">
-        <img src="/images/icons/modele.svg" alt="" aria-hidden="true" width="96" height="96">
+        <img src="{{ .Site.BaseURL }}images/icons/modele.svg" alt="" aria-hidden="true" width="96" height="96">
         <h3 class="modal-title mt-2 mb-4">{{ with .Get "title" }}{{ . }}{{ else }}{{ $label }}{{ end }}</h3>
       </div>
       <div class="modal-body">
