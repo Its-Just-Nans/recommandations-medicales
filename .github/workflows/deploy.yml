@@ -45,6 +45,8 @@ jobs:
           fi
           echo "Patching URL in hugo.toml to $URL"
           sed -i "s#baseURL = .*#baseURL = '$URL'#" hugo.toml
+          sed -i "s#\"recomedicales.fr\"#\"$URL\"#" assets/sass/style.scss
+          sed -i "s#\"recomedicales.fr\"#\"$URL\"#" layouts/partials/scripts.html
           head -n 2 hugo.toml
         env:
           DEPLOY_URL: https://${{ github.event.repository.owner.name }}.github.io/${{ github.event.repository.name }}/
