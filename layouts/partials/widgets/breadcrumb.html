@@ -8,7 +8,7 @@ $anchorContent := .p1.Title }} {{ if .p1.IsHome }} {{ $anchorContent = printf
   height="24"
   alt="Logo de RecoMédicales"
   aria-label="Accueil"
-/>` .Site.BaseURL | safeHTML }} {{ end }}
+/>` $.Site.BaseURL | safeHTML }} {{ end }}
 
 <li
   {{-
