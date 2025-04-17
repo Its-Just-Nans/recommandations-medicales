@@ -1,36 +1,18 @@
-{{ define "breadcrumbnav" }} {{ if .p1.Parent }} {{ template "breadcrumbnav"
-(dict "p1" .p1.Parent "p2" .p2 ) }} {{ else if not .p1.IsHome }} {{ template
-"breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 ) }} {{ end }} {{
-$anchorContent := .p1.Title }} {{ if .p1.IsHome }} {{ $anchorContent = printf
-`<img
-  src="%sfavicon.svg"
-  width="24"
-  height="24"
-  alt="Logo de RecoMédicales"
-  aria-label="Accueil"
-/>` $.Site.BaseURL | safeHTML }} {{ end }}
+{{ define "breadcrumbnav" }}
+  {{ if .p1.Parent }}
+    {{ template "breadcrumbnav" (dict "p1" .p1.Parent "p2" .p2 )  }}
+  {{ else if not .p1.IsHome }}
+    {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
+  {{ end }}
 
-<li
-  {{-
-  if
-  eq
-  .p1
-  .p2
-  }}
-  class="breadcrumb-item active"
-  aria-current="page"
-  {{
-  else
-  }}
-  class="breadcrumb-item"
-  {{
-  end
-  }}
->
-  {{ if ne .p1 .p2 }}<a href="{{ .p1.Permalink }}"
-    >{{ end }} {{ with .p1.Params.breadcrumbTitle }}{{ . }}{{ else }}{{
-    $anchorContent | markdownify | truncate 25 }}{{ end }} {{ if ne .p1 .p2
-    }}</a
-  >{{ end }}
+  {{ $anchorContent := .p1.Title }}
+  {{ if .p1.IsHome }}
+    {{ $anchorContent = printf `<img src="%sfavicon.svg" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil">` $.Site.BaseURL | safeHTML }}
+  {{ end }}
+
+<li {{- if eq .p1 .p2 }} class="breadcrumb-item active" aria-current="page"{{ else }} class="breadcrumb-item"{{ end }}>
+  {{ if ne .p1 .p2 }}<a href="{{ .p1.Permalink }}">{{ end }}
+    {{ with .p1.Params.breadcrumbTitle }}{{ . }}{{ else }}{{ $anchorContent | markdownify | truncate 25 }}{{ end }}
+    {{ if ne .p1 .p2 }}</a>{{ end }}
 </li>
 {{ end -}}
