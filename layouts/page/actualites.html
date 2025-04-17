@@ -8,12 +8,8 @@
           <h1 class="small">{{ .Title }}</h1>
         </div>
         <div class="icon-container">
-          <img
-            src="{{ .Site.BaseURL }}images/icons/journal.svg"
-            class="img-fluid"
-            alt="Actualités pour le médecin généraliste"
-            aria-hidden="true"
-          />
+          <img src="{{ absURL "images/icons/journal.svg" }}" class="img-fluid"
+          alt="Actualités pour le médecin généraliste" aria-hidden="true" />
         </div>
       </header>
     </div>

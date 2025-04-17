@@ -1,7 +1,7 @@
 {{ with .Params.tags }} {{ range . }}
 <a
   class="chip chip-action chip-xs"
-  href="{{ $.Site.BaseURL }}tags/{{ . | urlize }}/"
+  href="{{ absURL "tags/{{ . | urlize }}/" }}"
   rel="tag"
   >{{ . }}</a
 >

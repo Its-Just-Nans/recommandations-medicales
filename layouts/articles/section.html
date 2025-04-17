@@ -8,7 +8,7 @@
             <h1 class="small">{{ .Title }}</h1>
           </div>
           <div class="icon-container">
-            <img src="{{ .Site.BaseURL }}images/icons/articles.svg" class="img-fluid" alt="Articles en rapport avec la médecine générale" aria-hidden="true">
+            <img src="{{ absURL "images/icons/articles.svg" }}" class="img-fluid" alt="Articles en rapport avec la médecine générale" aria-hidden="true">
           </div>
         </header>
         <nav aria-label="Fil d'ariane" class="mt-4 mb-5">
@@ -20,7 +20,7 @@
       <div class="col-12 grid-list">
       {{ range .Pages.ByPublishDate.Reverse }}
         <div class="card card-list article">
-          <div class="card-img-top bg-article" style="background-image: url('{{ $.Site.BaseURL }}images/articles/{{.File.BaseFileName}}.webp')"></div>
+          <div class="card-img-top bg-article" style="background-image: url('{{ absURL "images/articles/{{.File.BaseFileName}}.webp')" }}"></div>
           <div class="card-header">
             <h2 class="card-title"><a class="stretched-link text-reset" href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h2>
             {{ with .Params.Subtitle}}<h3 class="card-subtitle">{{ . }}</h3>{{end}}

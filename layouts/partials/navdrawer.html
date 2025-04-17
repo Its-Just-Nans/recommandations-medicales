@@ -8,10 +8,10 @@
     <div class="d-flex flex-column min-vh-100">
       <div class="navdrawer-header text-primary d-flex">
         <div class="navdrawer-logo"></div>
-        <a class="navbar-brand" href="{{ .Site.BaseURL }}">RecoMédicales</a>
+        <a class="navbar-brand" href="{{ absURL "" }}">RecoMédicales</a>
       </div>
       <div class="navdrawer-nav">
-        <a class="text-secondary" href="{{ .Site.BaseURL }}scores/"
+        <a class="text-secondary" href="{{ absURL "scores/" }}"
           >Scores et outils cliniques</a
         >
         {{ range $taxonomyname, $taxonomy := .Site.Taxonomies }} {{ if eq

@@ -10,7 +10,8 @@
             <h2>Chapitres autour du concept</h2>
           </div>
           <div class="icon-container">
-            <img src="{{ .Site.BaseURL }}images/icons/tag.svg" class="img-fluid" alt="Nuage de mots-clés">
+            <img src="{{ absURL "images/icons/tag.svg" }}" class="img-fluid"
+            alt="Nuage de mots-clés">
           </div>
         </header>
         <nav aria-label="Fil d'ariane" class="my-4">
@@ -18,21 +19,31 @@
             {{ template "breadcrumbnav" (dict "p1" . "p2" .) }}
           </ol>
         </nav>
-        {{ with .Content }}<div class="mb-5">{{ . }}</div>{{ end }}
+        {{ with .Content }}
+        <div class="mb-5">{{ . }}</div>
+        {{ end }}
       </div>
       <div class="col-12 grid-1-2-3 mb-5">
-      {{ range .Pages.ByTitle }}
-      <div class="card card-grid">
-        <div class="card-body position-relative card-primary-action">
-          <h2 class="card-title"><a class="stretched-link text-reset" href="{{ .RelPermalink }}">{{ .Title | markdownify }}</a></h2>
-          {{ with .Params.specialites}}<h3 class="card-subtitle d-none d-md-block">{{ delimit . ", " }}</h3>{{end}}
+        {{ range .Pages.ByTitle }}
+        <div class="card card-grid">
+          <div class="card-body position-relative card-primary-action">
+            <h2 class="card-title">
+              <a class="stretched-link text-reset" href="{{ .RelPermalink }}"
+                >{{ .Title | markdownify }}</a
+              >
+            </h2>
+            {{ with .Params.specialites}}
+            <h3 class="card-subtitle d-none d-md-block">
+              {{ delimit . ", " }}
+            </h3>
+            {{end}}
+          </div>
+          <div class="card-actions">
+            {{ partial "widgets/guidelineyear-render.html" . }} {{ partial
+            "widgets/tags-outline-render.html" . }}
+          </div>
         </div>
-        <div class="card-actions">
-          {{ partial "widgets/guidelineyear-render.html" . }}
-          {{ partial "widgets/tags-outline-render.html" . }}
-        </div>
-      </div>
-      {{ end }}
+        {{ end }}
       </div>
     </div>
   </div>

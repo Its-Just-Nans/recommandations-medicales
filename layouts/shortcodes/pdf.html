@@ -1,6 +1,6 @@
 <embed
   class="embed-responsive embed-pdf my-4"
-  src="{{ .Site.BaseURL }}print/{{ .Get 0 }}"
+  src="{{ absURL "print/{{ .Get 0 }}" }}"
   type="application/pdf"
   {{
   with

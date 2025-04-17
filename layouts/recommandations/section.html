@@ -12,7 +12,7 @@
           </div>
           <div class="icon-container">
             <img
-              src="{{ .Site.BaseURL }}images/icons/recommandations.svg"
+              src="{{ absURL "images/icons/recommandations.svg" }}"
               class="img-fluid"
               alt="Recommandations médicales pour le médecin généraliste"
               aria-hidden="true"
@@ -35,7 +35,7 @@
           >
           <a
             class="chip chip-action chip-outline"
-            href="{{ .Site.BaseURL }}annees/"
+            href="{{ absURL "annees/" }}"
             >Par années</a
           >
           <!-- create a list with all uppercase letters -->

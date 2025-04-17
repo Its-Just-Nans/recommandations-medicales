@@ -9,14 +9,14 @@
             <h2>Chapitres ayant bénéficié de recommandations dans l'année</h2>
           </div>
           <div class="icon-container">
-            <img src="{{ .Site.BaseURL }}images/icons/year.svg" class="img-fluid" alt="Nuage de mots-clés">
+            <img src="{{ absURL "images/icons/year.svg" }}" class="img-fluid" alt="Nuage de mots-clés">
           </div>
         </header>
         <nav aria-label="Fil d'ariane" class="my-4">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}"><img src="{{ $.Site.BaseURL }}favicon.svg" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil"></a></li>
-            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}recommandations/">Recommandations</a></li>
-            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}annees/">Années</a></li>
+            <li class="breadcrumb-item"><a href="{{ absURL "" }}"><img src="{{ absURL "favicon.svg" }}" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil"></a></li>
+            <li class="breadcrumb-item"><a href="{{ absURL "recommandations/" }}">Recommandations</a></li>
+            <li class="breadcrumb-item"><a href="{{ absURL "annees/" }}">Années</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ .Title | markdownify }}</li>
           </ol>
         </nav>

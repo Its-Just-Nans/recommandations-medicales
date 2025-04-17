@@ -5,14 +5,19 @@
     {{ template "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 )  }}
   {{ end }}
 
-  {{ $anchorContent := .p1.Title }}
-  {{ if .p1.IsHome }}
-    {{ $anchorContent = printf `<img src="%sfavicon.svg" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil">` $.Site.BaseURL | safeHTML }}
-  {{ end }}
+  {{ $anchorContent := .p1.Title | markdownify | truncate 25 }}
 
 <li {{- if eq .p1 .p2 }} class="breadcrumb-item active" aria-current="page"{{ else }} class="breadcrumb-item"{{ end }}>
   {{ if ne .p1 .p2 }}<a href="{{ .p1.Permalink }}">{{ end }}
-    {{ with .p1.Params.breadcrumbTitle }}{{ . }}{{ else }}{{ $anchorContent | markdownify | truncate 25 }}{{ end }}
+    {{ with .p1.Params.breadcrumbTitle }}
+      {{ . }}
+    {{ else }}
+      {{ if .p1.IsHome }}
+        <img src="{{absURL "favicon.svg" }}" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil">
+      {{ else }}
+        {{ $anchorContent }}
+      {{ end }}
+    {{ end }}
     {{ if ne .p1 .p2 }}</a>{{ end }}
 </li>
 {{ end -}}

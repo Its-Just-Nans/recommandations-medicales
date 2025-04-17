@@ -2,11 +2,11 @@
   <div class="about">
     <div class="about-recomedicales">
       <a
-        href="{{ .Site.BaseURL }}"
+        href="{{ absURL "" }}"
         aria-label="Retourner à l'accueil"
         title="Accueil"
         ><img
-          src="{{ .Site.BaseURL }}favicon.svg"
+          src="{{ absURL "favicon.svg" }}"
           width="48"
           height="48"
           alt="Logo de Recomédicales"
@@ -22,7 +22,7 @@
         class="no-icon"
         title="Netlify: l'hébergeur"
         ><img
-          src="{{ .Site.BaseURL }}images/logos/netlify.svg"
+          src="{{ absURL "images/logos/netlify.svg" }}"
           alt="Logo de Netlify"
           width="114"
           height="50"
@@ -32,18 +32,18 @@
     </div>
     <ul class="about-sections">
       <li class="text-black-secondary">Sections</li>
-      <li><a href="{{ .Site.BaseURL }}actualites/">Actualités médicales</a></li>
-      <li><a href="{{ .Site.BaseURL }}recommandations/">Recommandations</a></li>
-      <li><a href="{{ .Site.BaseURL }}cabinet/">Outils pour le cabinet</a></li>
-      <li><a href="{{ .Site.BaseURL }}articles/">Articles sur la santé</a></li>
+      <li><a href="{{ absURL "actualites/" }}">Actualités médicales</a></li>
+      <li><a href="{{ absURL "recommandations/" }}">Recommandations</a></li>
+      <li><a href="{{ absURL "cabinet/" }}">Outils pour le cabinet</a></li>
+      <li><a href="{{ absURL "articles/" }}">Articles sur la santé</a></li>
     </ul>
     <ul class="about-site">
       <li class="text-black-secondary">RecoMédicales</li>
       <li class="text-muted">Qui sommes-nous ?</li>
       <li>
-        <a href="{{ .Site.BaseURL }}mentions-legales/">Mentions légales</a>
+        <a href="{{ absURL "mentions-legales/" }}">Mentions légales</a>
       </li>
-      <li><a href="{{ .Site.BaseURL }}projet/">Le projet</a></li>
+      <li><a href="{{ absURL "projet/" }}">Le projet</a></li>
       <li>
         <a
           class="no-icon"
@@ -110,7 +110,7 @@
         ></a>
         <a
           class="btn btn-sm btn-icon"
-          href="{{ .Site.BaseURL }}index.xml"
+          href="{{ absURL "index.xml" }}"
           aria-label="S'abonner au flux RSS"
           data-toggle="tooltip"
           title="Le flux RSS"
