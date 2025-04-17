@@ -4,15 +4,15 @@
 {{ with .Params.image }}
   {{ $image := $.File.BaseFileName }}
   {{ if $.Params.imageWEBP }}
-    {{ $imageUrl = printf "/images/photos/%s.webp" $image }}
+    {{ $imageUrl = printf "%simages/photos/%s.webp" $.Site.BaseURL $image }}
   {{ else if $.Params.imagePNG }}
-    {{ $imageUrl = printf "/images/photos/%s.png" $image }}
+    {{ $imageUrl = printf "%simages/photos/%s.png" $.Site.BaseURL $image }}
   {{ else if and (eq $.Section "articles") (eq $.Kind "page")}}
-    {{ $imageUrl = printf "/images/articles/%s.jpg" $image }}
+    {{ $imageUrl = printf "%simages/articles/%s.jpg" $.Site.BaseURL $image }}
   {{ else if and (eq $.Section "cabinet") (eq $.Kind "page")}}
-    {{ $imageUrl = printf "/images/cabinet/%s.jpg" $image }}
+    {{ $imageUrl = printf "%simages/cabinet/%s.jpg" $.Site.BaseURL $image }}
   {{ else }}
-    {{ $imageUrl = printf "/images/photos/%s.jpg" $image }}
+    {{ $imageUrl = printf "%simages/photos/%s.jpg" $.Site.BaseURL $image }}
   {{ end }}
 {{ else }}
   {{ $imageUrl = $.Site.Params.ogimage }}
