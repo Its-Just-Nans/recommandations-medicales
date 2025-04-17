@@ -49,7 +49,7 @@
             </p>
           </div>
           <div class="card-actions">
-            {{- with .Params.Annees }}<a class="chip chip-outline chip-action chip-xs text-primary" href="{{ .Site.BaseURL }}annees/{{ . }}/" rel="tag">{{ . }}</a>{{ end -}}
+            {{- with .Params.Annees }}<a class="chip chip-outline chip-action chip-xs text-primary" href="{{ $.Site.BaseURL }}annees/{{ . }}/" rel="tag">{{ . }}</a>{{ end -}}
             {{- if ( gt ( len .Params.tags ) 0 ) }}{{ partial "widgets/tags-outline-render.html" . }}{{ end -}}
           </div>
         </div>
@@ -67,7 +67,7 @@
               </p>
             </div>
             <div class="card-actions">
-              {{- with .Params.Annees }}<a class="chip chip-outline chip-action chip-xs text-primary" href="{{ .Site.BaseURL }}annees/{{ . }}/" rel="tag">{{ . }}</a>{{ end -}}
+              {{- with .Params.Annees }}<a class="chip chip-outline chip-action chip-xs text-primary" href="{{ $.Site.BaseURL }}annees/{{ . }}/" rel="tag">{{ . }}</a>{{ end -}}
               {{- if ( gt ( len .Params.tags ) 0 ) }}{{ partial "widgets/tags-outline-render.html" . }}{{ end -}}
             </div>
           </div>

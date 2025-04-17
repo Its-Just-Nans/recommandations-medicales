@@ -53,7 +53,7 @@
       <div class="recommandation__info">
         {{- with .Params.specialites }}
         <p class="typography-overline">Système</p>
-        <div class="d-flex flex-wrap">{{ range .}}<a href="{{ .Site.BaseURL }}specialites/{{ . | urlize }}/" class="chip chip-action chip-xs text-capitalize">{{ . }}</a>{{ end }}</div>
+        <div class="d-flex flex-wrap">{{ range .}}<a href="{{ $.Site.BaseURL }}specialites/{{ . | urlize }}/" class="chip chip-action chip-xs text-capitalize">{{ . }}</a>{{ end }}</div>
         {{ end -}}
 
         {{- with .Params.Auteurs }}
@@ -107,7 +107,7 @@
 
                 <div class="d-flex flex-wrap align-items-center">
                 {{ with .Params.annees }}
-                  <a class="chip chip-secondary chip-action mr-3" href="{{ .Site.BaseURL }}annees/{{ . | urlize }}/" rel="tag" data-toggle="tooltip" title="Toutes les recos de {{ . }}" data-placement="bottom">Recommandation {{ . }}</a>
+                  <a class="chip chip-secondary chip-action mr-3" href="{{ $.Site.BaseURL }}annees/{{ . | urlize }}/" rel="tag" data-toggle="tooltip" title="Toutes les recos de {{ . }}" data-placement="bottom">Recommandation {{ . }}</a>
                 {{ end }}
 
                 {{- with .Params.sources }}
