@@ -37,11 +37,10 @@ jobs:
         run: npm install
       - name: Patch URL
         run: |
+          URL=${{ github.event.repository.html_url }}
           echo "Patching URL in hugo.toml to $URL"
           sed -i "s#baseURL = .*#baseURL = '$URL'#" hugo.toml
           head -n 2 hugo.toml
-        env:
-          URL: https://${{ github.event.repository.owner.name }}.github.io/${{ github.event.repository.name }}/
       - name: Build
         run: npm run build
       - name: Upload artifact
