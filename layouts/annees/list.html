@@ -14,9 +14,9 @@
         </header>
         <nav aria-label="Fil d'ariane" class="my-4">
           <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/"><img src="/favicon.svg" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil"></a></li>
-            <li class="breadcrumb-item"><a href="/recommandations/">Recommandations</a></li>
-            <li class="breadcrumb-item"><a href="/annees/">Années</a></li>
+            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}"><img src="{{ .Site.BaseURL }}favicon.svg" width="24" height="24" alt="Logo de RecoMédicales" aria-label="Accueil"></a></li>
+            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}recommandations/">Recommandations</a></li>
+            <li class="breadcrumb-item"><a href="{{ .Site.BaseURL }}annees/">Années</a></li>
             <li class="breadcrumb-item active" aria-current="page">{{ .Title | markdownify }}</li>
           </ol>
         </nav>
