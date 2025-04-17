@@ -35,6 +35,12 @@ jobs:
         uses: actions/setup-node@v4
       - name: Install dependencies
         run: npm install
+      - name: Patch URL
+        run: |
+          echo "Patching URL in hugo.toml to ${URL}"
+          sed -i '#baseURL = "https://recomedicales.fr/"/baseURL = "$URL"/' hugo.toml
+        env:
+          URL: https://${{ github.event.repository.owner }}.github.io/${{ github.event.repository.name }}/
       - name: Build
         run: npm run build
       - name: Upload artifact
