@@ -38,7 +38,8 @@ jobs:
       - name: Patch URL
         run: |
           echo "Patching URL in hugo.toml to $URL"
-          sed -i '#baseURL = "https://recomedicales.fr/"/baseURL = "$URL"/' hugo.toml
+          sed -i "s#baseURL = .*#baseURL = '$URL'#" hugo.toml
+          head -n 2 hugo.toml
         env:
           URL: https://${{ github.event.repository.owner.name }}.github.io/${{ github.event.repository.name }}/
       - name: Build
