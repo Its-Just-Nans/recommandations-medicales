@@ -37,10 +37,18 @@ jobs:
         run: npm install
       - name: Patch URL
         run: |
-          URL=${{ github.event.repository.html_url }}
+          # use the secret URL if it is set, otherwise use the default URL
+          if [ -z "$SECRET_URL" ]; then
+            URL=$DEPLOY_URL
+          else
+            URL=$SECRET_URL
+          fi
           echo "Patching URL in hugo.toml to $URL"
           sed -i "s#baseURL = .*#baseURL = '$URL'#" hugo.toml
           head -n 2 hugo.toml
+        env:
+          DEPLOY_URL: https://${{ github.event.repository.owner.name }}.github.io/${{ github.event.repository.name }}/
+          SECRET_URL: ${{ secrets.URL }}
       - name: Build
         run: npm run build
       - name: Upload artifact
