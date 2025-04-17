@@ -3,12 +3,12 @@
 "breadcrumbnav" (dict "p1" .p1.Site.Home "p2" .p2 ) }} {{ end }} {{
 $anchorContent := .p1.Title }} {{ if .p1.IsHome }} {{ $anchorContent = printf
 `<img
-  src="{{ .Site.BaseURL }}favicon.svg"
+  src="%sfavicon.svg"
   width="24"
   height="24"
   alt="Logo de RecoMédicales"
   aria-label="Accueil"
-/>` | safeHTML }} {{ end }}
+/>` .Site.BaseURL | safeHTML }} {{ end }}
 
 <li
   {{-
